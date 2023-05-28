@@ -1,0 +1,47 @@
+Unity Memory Profiler
+
+一、Memory in Unity：
+1、托管内存：Mono或IL2CPP的脚本虚拟机(VM)实现了托管内存系统，它使用托管堆和垃圾收集器来自动分配和分配内存，Profiler将此类分配的任何发生记录为GC.Alloc；
+GC会形成内存碎片，而分配对象时，对象必须始终在内存中占据连续的空间块。如果分配了一个大对象并且没有足够的连续可用空间来容纳它，Unity 内存管理器执行两个操作：
+①运行垃圾收集器，试图释放空间来满足需求。
+②扩展堆的大小，基于平台的不同扩展不等数量的堆大小，一般为2倍。
+
+2、C#非托管内存；
+3、本机内存：Unity用于运行引擎的C++内存；
+
+二、Profiler
+1、Simple视图：
+①Total Committed Memory：
+>Tracked Memory：Unity使用和跟踪的内存总量(使用中)，以及Unity预留的内存总量(预留)。
+>Untracked Memory：Unity使用但不知道的内存总量，如Native插件。
+
+②Total Memory Breakdown：
+>Managed Heap (in use / Reserved)：托管代码使用的堆大小/总堆大小，该内存由内存管理器自动管理。
+
+2、Detailed视图：
+①Assets：当前从scenes、Resources和Asset Bundles加载的总资源。
+>纹理(Texture)：
+>网格(Mesh)：
+>AnimationClip：
+>Shader：
+>Material：
+>.....
+
+②Other：资源、游戏对象或组件以外的对象。其中包括诸如Unity用于不同系统的内存之类的信息。
+>SerializedFile：AssetBundle加载时产生的序列化信息，不是其包含资源的内容，因此，其大小要小于或远小于资源的实际内存
+>.....
+
+③Not Saved: Objects marked as DontSave
+>RenderTexture：
+>AssetBundle：
+>Material：
+>.....
+
+④Scene Memory: Objects and attached components
+⑤Builtin Resources: Unity Editor resources or Unity default resources, such as Shaders you have added to the Always Included Shaders list of the Graphics settings
+
+三、Optimization
+1、资源冗余
+2、内存泄漏
+3、资源优化
+4、Mono内存(总量分配/一次性大内存分配)

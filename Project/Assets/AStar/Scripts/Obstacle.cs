@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+namespace AStar
 {
-    private InputHandler inputHandler;
-
-    private void Start()
+    public class Obstacle : MonoBehaviour
     {
-        inputHandler = FindObjectOfType<InputHandler>();
-    }
+        private InputHandler inputHandler;
 
-    private void OnMouseOver()
-    {
-        if (Input.GetKey(KeyCode.Mouse0))
+        private void Start()
         {
-            inputHandler.grabbedCube = gameObject;
+            inputHandler = FindObjectOfType<InputHandler>();
+        }
+
+        private void OnMouseOver()
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                inputHandler.grabbedCube = gameObject;
+            }
         }
     }
 }

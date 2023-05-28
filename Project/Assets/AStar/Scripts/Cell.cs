@@ -99,14 +99,16 @@ namespace AStar
 
             displayID.text = "" + id;
 
-            Renderer indicatorRenderer = indicatorDisplay.GetComponent<Renderer>();
+            var indicatorRenderer = indicatorDisplay.GetComponent<Renderer>();
             if (parent != null)
             {
                 indicatorRenderer.enabled = true;
                 indicator.transform.LookAt(parent.transform.position);
             }
             else
+            {
                 indicatorRenderer.enabled = false;
+            }
         }
 
         private void OnTriggerStay(Collider other)
@@ -156,9 +158,9 @@ namespace AStar
 
         public void CalculateH(Cell targetCell)
         {
-            Vector3 targetPosition = targetCell.transform.position;
-            Vector3 ownPosition = transform.position;
-            float manhattanDistance = Mathf.Abs(targetPosition.x - ownPosition.x) + Mathf.Abs(targetPosition.z - ownPosition.z);
+            var targetPosition = targetCell.transform.position;
+            var ownPosition = transform.position;
+            var manhattanDistance = Mathf.Abs(targetPosition.x - ownPosition.x) + Mathf.Abs(targetPosition.z - ownPosition.z);
             H = manhattanDistance;
         }
 
@@ -171,7 +173,7 @@ namespace AStar
         // those coordinates. Could be replaced with a kernel-check over a two-dimensional array.
         public List<Cell> GetAdjacentCells(List<Cell> allCells, int cellsPerRow)
         {
-            List<Cell> adjacentCells = new List<Cell>();
+            var adjacentCells = new List<Cell>();
 
             Cell neighbourUpperLeft = null;
             Cell neighbourUpper = null;

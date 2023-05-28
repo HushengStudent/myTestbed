@@ -22,7 +22,7 @@ namespace AStar
             {
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    Ray ray = gameCamera.ScreenPointToRay(Input.mousePosition);
+                    var ray = gameCamera.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out RaycastHit hit, 100))
                     {
                         grabbedCube.transform.position = FindClosestCellPosition(hit.point) + new Vector3(0, 1, 0);
@@ -41,10 +41,10 @@ namespace AStar
             Cell closestCell = null;
             float distance = Mathf.Infinity;
 
-            foreach (Cell cell in grid.allCells)
+            foreach (var cell in grid.allCells)
             {
-                Vector3 diff = cell.transform.position - startPosition;
-                float curDistance = diff.sqrMagnitude;
+                var diff = cell.transform.position - startPosition;
+                var curDistance = diff.sqrMagnitude;
                 if (curDistance < distance)
                 {
                     closestCell = cell;

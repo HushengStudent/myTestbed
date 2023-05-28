@@ -35,17 +35,17 @@ namespace AStar
             numberOfCells = cellsPerRow * cellsPerRow;
             allCells = new List<Cell>();
 
-            int zOffset = 0;
-            int xOffset = 0;
-            int counter = 0;
+            var zOffset = 0;
+            var xOffset = 0;
+            var counter = 0;
 
-            for (int i = 0; i < numberOfCells; i++)
+            for (var i = 0; i < numberOfCells; i++)
             {
                 counter += 1;
                 xOffset += 1;
 
-                Vector3 newPosition = transform.position + new Vector3(xOffset, 0, zOffset);
-                Cell newCell = Instantiate(cellPrefab, newPosition, Quaternion.identity);
+                var newPosition = transform.position + new Vector3(xOffset, 0, zOffset);
+                var newCell = Instantiate(cellPrefab, newPosition, Quaternion.identity);
                 newCell.id = i;
                 allCells.Add(newCell);
 
@@ -82,11 +82,11 @@ namespace AStar
                 openList = new List<Cell>();
                 closedList = new List<Cell>();
 
-                Cell currentCell = startCell;
+                var currentCell = startCell;
                 AddCellToClosedList(currentCell);
 
                 const float cycleDelay = 0f;
-                int cycleCounter = 0;
+                var cycleCounter = 0;
                 while (currentCell.id != targetCell.id)
                 {
                     yield return new WaitForSeconds(cycleDelay);
@@ -102,9 +102,9 @@ namespace AStar
                     }
 
                     // Add all cells adjacent to currentCell to openList
-                    foreach (Cell cell in GetAdjacentCells(currentCell))
+                    foreach (var cell in GetAdjacentCells(currentCell))
                     {
-                        float tentativeG = currentCell.G + Vector3.Distance(currentCell.transform.position, cell.transform.position);
+                        var tentativeG = currentCell.G + Vector3.Distance(currentCell.transform.position, cell.transform.position);
                         // If cell is on closed list skip to next cycle
                         if (cell.onClosedList && tentativeG > cell.G)
                         {
@@ -126,8 +126,8 @@ namespace AStar
                     yield return new WaitForSeconds(cycleDelay);
 
                     // Get cell with lowest F value from openList, set it to currentCell
-                    float lowestFValue = 99999.9f;
-                    foreach (Cell cell in openList.Where(cell => cell.F < lowestFValue))
+                    var lowestFValue = 99999.9f;
+                    foreach (var cell in openList.Where(cell => cell.F < lowestFValue))
                     {
                         lowestFValue = cell.F;
                         currentCell = cell;
@@ -141,7 +141,7 @@ namespace AStar
                 if (targetCell && startCell)
                 {
                     // Get path
-                    List<Cell> path = new List<Cell>();
+                    var path = new List<Cell>();
                     currentCell = targetCell;
 
                     while (currentCell.id != startCell.id)
@@ -155,7 +155,7 @@ namespace AStar
                     // Draw path
                     lineRenderer.positionCount = path.Count;
 
-                    for (int i = 0; i < path.Count; i++)
+                    for (var i = 0; i < path.Count; i++)
                     {
                         lineRenderer.SetPosition(i, path[i].transform.position + new Vector3(0, 1, 0));
                     }
@@ -167,7 +167,7 @@ namespace AStar
 
         private void ResetAllCells()
         {
-            foreach (Cell cell in allCells)
+            foreach (var cell in allCells)
             {
                 cell.Reset();
             }

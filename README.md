@@ -1,7 +1,7 @@
 ### myTestbed
 #### Test
 
-software：Unity 2022.3.8f1c1/Visual Studio 2022.
+software：Unity/Unreal.
 
     >> A*.
-	>> UniTask：(https://github.com/Cysharp/UniTask).
+    >> UniTask：(https://github.com/Cysharp/UniTask).
